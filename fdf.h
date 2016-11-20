@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 22:43:45 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/19 18:08:19 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/20 16:26:05 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct		s_point
 	void			*next;
 }					t_point;
 
-typedef struct	s_line_data
+typedef struct		s_line_data
 {
 	int				dx;
 	int				dy;

@@ -6,18 +6,17 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:10:30 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/17 05:29:55 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/20 16:17:52 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void		img_put_pixel(t_env *e, t_point *p, int c)
+void				img_put_pixel(t_env *e, t_point *p, int c)
 {
-	int		pxl;
+	int				pxl;
 
-	pxl = (p->y) * e->img->line_size
-		+ (e->img->bpp/8) * (p->x);
+	pxl = (p->y) * e->img->line_size + (e->img->bpp / 8) * (p->x);
 	if (p->y < WIN_HEIGHT && p->x < WIN_LEN
 			&& p->y > 0 && p->x > 0)
 	{
@@ -46,7 +45,7 @@ int					segment_put(t_env *env, t_point a, t_point b)
 	t_line_data		*l;
 
 	if (!(l = new_ldata(a, b)))
-			return (-1);
+		return (-1);
 	while (42)
 	{
 		if (b.z > a.z)
@@ -67,9 +66,12 @@ int					segment_put(t_env *env, t_point a, t_point b)
 			a.y += l->iy;
 		}
 	}
-	//free ldata
 	return (0);
 }
+
+/*
+**	free ldata
+*/
 
 int					draw_map(t_point *p, t_env *env)
 {

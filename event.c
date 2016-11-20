@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 02:32:14 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/19 19:00:41 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/20 15:34:55 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				key_hook(int code, t_env *env)
 	return (0);
 }//colorier soit meme la map :) avec le curseur et les touches
 
-int		event(int code, t_env *env)
+int				event(int code, t_env *env)
 {
 	if (code == 53)
 	{
