@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:50:50 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/20 16:25:07 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/21 21:54:44 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,22 @@ t_tab			**keep_value(t_point *p, t_env *env)//utile ? :/
 }
 */
 
+void			center_points(t_env *env)
+{
+	int			height;
+	int			len;
+	double		s;
+
+	height = (WIN_HEIGHT + 100) / 2;
+	len = (WIN_LEN + 100) / 2;
+	env->center.x == 0 ? env->center.x = 10 : env->center.x;
+	s = (len - 100) / (env->center.x);
+	ft_putstr("\n\n\n");
+	ft_putnbr(-env->center.y + height);
+	m_rlud(env, -env->center.x + len, -env->center.y + height);
+	m_scale(env, s);
+}
+
 void			get_max(t_env *env, t_point *p)
 {
 	t_point		*tmp;
@@ -148,7 +164,9 @@ int				main(int argc, char **argv)
 				&& env->scale < SCALE_MAX)
 		env->scale += 1;*/
 	env->p = p;
+	map_center(env);
 	get_max(env, env->p);
+	center_points(env);
 	if (draw_map(p, env) == -1)
 		return (-1);//fermer la fenetre et exit
 //	env->tab = keep_value(p, env);

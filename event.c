@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 02:32:14 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/20 15:34:55 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/21 22:34:51 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int				key_hook(int code, t_env *env)
 		tmp = tmp->next;
 	}
 //ajouter les rotations ici;
-	if (code == 2)
+	if (code == 0)
 		/*env->p = */m_rlud(env, SPEED, 0);
 	ft_putstr("1ere matrice passe");
-	if (code == 0)
+	if (code == 2)
 		/*env->p = */m_rlud(env, -SPEED, 0);
 	if (code == 49)
 		/*env->p = */m_rlud(env, 0, SPEED);

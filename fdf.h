@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 22:43:45 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/20 16:26:05 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/21 22:34:53 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # define TILE_WIDTH 60
 # define TILE_HEIGHT 40
 # define P_HEIGHT 1
-# define WIN_LEN 700
-# define WIN_HEIGHT 750
-# define SPEED 1
-# define SCALE_POWER 0.2
+# define WIN_LEN 900
+# define WIN_HEIGHT 950
+# define SPEED 10
+# define SCALE_POWER 0.1
 
 typedef struct		s_matrice
 {
@@ -95,6 +95,7 @@ typedef struct		s_env
 	int				error;
 }					t_env;
 
+void				map_center(t_env *env);
 //void				matricialisation(t_env *env, t_point *p, t_matrice *m);
 void				m_scale(t_env *env, double s);
 void				m_rlud(t_env *env, double x, double y);

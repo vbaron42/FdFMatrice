@@ -6,23 +6,23 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:10:30 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/20 16:17:52 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/21 20:25:37 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void				img_put_pixel(t_env *e, t_point *p, int c)
+void				img_put_pixel(t_env *env, t_point *p, int c)
 {
 	int				pxl;
 
-	pxl = (p->y) * e->img->line_size + (e->img->bpp / 8) * (p->x);
 	if (p->y < WIN_HEIGHT && p->x < WIN_LEN
 			&& p->y > 0 && p->x > 0)
 	{
-		e->img->pxl_byt[pxl] = c;
-		e->img->pxl_byt[++pxl] = c >> 8;
-		e->img->pxl_byt[++pxl] = c >> 16;
+		pxl = (p->y) * env->img->line_size + (env->img->bpp / 8) * (p->x);
+		env->img->pxl_byt[pxl] = c;
+		env->img->pxl_byt[++pxl] = c >> 8;
+		env->img->pxl_byt[++pxl] = c >> 16;
 	}
 }
 

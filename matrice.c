@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 03:12:00 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/20 16:02:15 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/21 22:34:49 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void			map_center(t_env *env)
 		tmp = tmp->next;
 	center.x = (tmp->x + env->p->x) / 2;
 	center.y = (tmp->y + env->p->y) / 2;
+	ft_putchar('\n');
+	ft_putnbr(center.x);
+	ft_putchar('\n');
+	ft_putnbr(center.y);
 	env->center = center;
 }
 
@@ -31,27 +35,22 @@ t_point			*matricialisation(t_env *env, t_point *p, t_matrice *m)
 	double		y;
 	double		z;
 	double		w;
-	t_point		*tmp;
 
-	x = p->x - env->center.x;//trouver la valeur de cx et cy (env->center.x)
-	y = p->y - env->center.y;
-	z = p->z;
+	p->x -= env->center.x;//trouver la valeur de cx et cy (env->center.x)
+	p->y -= env->center.y;
 	w = 1;//trouver la valeur de w (s)
-	env->center.x = x;
-	env->center.y = y;
-	p->x = (m->a * x + m->b * y + m->c * z + m->d * w);
-	p->y = (m->e * x + m->f * y + m->g * z + m->h * w);
-	p->z = (m->i * x + m->j * y + m->k * z + m->l * w);//p->w ne change pas :)
+	//env->center.x = x;
+	//env->center.y = y;
+	x = (m->a * p->x/* + m->b * p->y + m->c * p->z*/ + m->d * w);
+	y = (/*m->e * p->x + */m->f * p->y + /*m->g * p->z + */m->h * w);
+	z = (/*m->i * p->x + m->j * p->y + */m->k * p->z + m->l * w);//p->w ne change pas :)
+	p->x = x;
+	p->y = y;
+	p->z = z;
+	ft_putnbr(x);
 	p->x += env->center.x;
 	p->y += env->center.y;
 	return (p);
-	tmp = env->p;
-	while (tmp != NULL)
-	{
-		ft_putnbr(tmp->y);
-//		*tmp = ortho_to_iso(*tmp, *env);
-		tmp = tmp->next;
-	}
 }
 
 void			matrice(t_env *env, t_matrice *m)
@@ -80,7 +79,7 @@ void			m_rlud(t_env *env, double x, double y)
 	t_point		*p2;
 
 	if (!(m = (t_matrice*)ft_memalloc(sizeof(t_matrice))))
-		/*return (NULL)*/;//fdf_malloc_error();
+		;//ft_error();
 	m->d = x;
 	m->h = y;
 	m->l = 0;
@@ -88,15 +87,9 @@ void			m_rlud(t_env *env, double x, double y)
 	m->f = 1;
 	m->k = 1;
 	m->p = 1;
-	ft_putstr("entree dans la matrice\n\n");
 	matrice(env, m);
-	ft_putstr("wtf");
-	ft_putnbr(env->p->y);
-//	ft_putnbr(env->p->next->y);
-	ft_putstr("ok, that s better");
-	//get_center(e); ... toi tu va me les peter ...
+	map_center(env);
 	free(m);
-//	return (env->p);
 }
 
 void			m_scale(t_env *env, double s)
@@ -104,12 +97,14 @@ void			m_scale(t_env *env, double s)
 	t_matrice	*m;
 
 	if (!(m = (t_matrice*)ft_memalloc(sizeof(t_matrice))))
-		/*return (NULL)*/;//fdf_malloc_error();
+		;//ft_error();
+	m->d = 0;
+	m->h = 0;
+	m->l = 0;//?
 	m->a = s;
 	m->f = s;
 	m->k = s;
-	m->p = 1;
-	/*env->p = */matrice(env, m);
+	m->p = 1;//qu est ce que fou ce p ici ???
+	matrice(env, m);
 	free(m);
-//	return (env->p);
 }
