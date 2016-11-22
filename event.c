@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 02:32:14 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 18:06:04 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 18:20:13 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ int				key_hook(int code, t_env *env)
 		tmp = tmp->next;
 	}
 	if (code == 123)
-		m_rot_y(env, ROT_Y_POW);
+		m_rot_y(env, ROT_POW);
 	if (code == 124)
-		m_rot_y(env, -ROT_Y_POW);
+		m_rot_y(env, -ROT_POW);
+	if (code == 126)
+		m_rot_x(env, ROT_POW);
+	if (code == 125)
+		m_rot_x(env, -ROT_POW);
 //ajouter les rotations ici;
 	if (code == 0)
 		/*env->p = */m_rlud(env, SPEED, 0);

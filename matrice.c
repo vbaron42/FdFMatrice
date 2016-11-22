@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 03:12:00 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 18:05:01 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 18:20:11 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,22 @@ void			m_rot_y(t_env *env, double x)
 	m->k = cos(x);
 	m->f = 1;
 	m->h = 1;
+	matrice(env, m);
+	free(m);
+}
+
+void			m_rot_x(t_env *env, double x)
+{
+	t_matrice	*m;
+
+	if (!(m = (t_matrice*)ft_memalloc(sizeof(t_matrice))))
+		;//ft_error();
+	m->a = 1;
+	m->f = cos(x);
+	m->g = -sin(x);
+	m->j = sin(x);
+	m->k = cos(x);
+	m->p = 1;
 	matrice(env, m);
 	free(m);
 }

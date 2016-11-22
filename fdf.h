@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 22:43:45 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 18:07:27 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 18:20:15 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define P_HEIGHT 1
 # define WIN_LEN 900
 # define WIN_HEIGHT 950
-# define ROT_Y_POW 3.14159265358979323846 / 64
+# define ROT_POW 3.14159265358979323846 / 64
 # define SPEED 20
 # define SCALE_POWER 0.2
 
@@ -98,6 +98,7 @@ typedef struct		s_env
 }					t_env;
 
 void				m_rot_y(t_env *env, double x);
+void				m_rot_x(t_env *env, double x);
 void				map_center(t_env *env);
 //void				matricialisation(t_env *env, t_point *p, t_matrice *m);
 void				m_scale(t_env *env, double s);
