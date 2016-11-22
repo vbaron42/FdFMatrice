@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 22:43:45 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 18:20:15 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 19:54:02 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct		s_env
 
 void				m_rot_y(t_env *env, double x);
 void				m_rot_x(t_env *env, double x);
+void				m_rot_z(t_env *env, double x);
 void				map_center(t_env *env);
 //void				matricialisation(t_env *env, t_point *p, t_matrice *m);
 void				m_scale(t_env *env, double s);

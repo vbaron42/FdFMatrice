@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:50:50 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/21 21:54:44 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 19:35:31 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ int				main(int argc, char **argv)
 	if (draw_map(p, env) == -1)
 		return (-1);//fermer la fenetre et exit
 //	env->tab = keep_value(p, env);
-	ft_putstr("hook entrance :\n");
 	mlx_key_hook(env->win, event, env);
 	mlx_expose_hook(env->win, print_img, env);
 	mlx_loop(env->mlx);

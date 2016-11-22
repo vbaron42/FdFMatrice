@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 02:32:14 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 18:20:13 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 19:45:27 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,23 @@ int				key_hook(int code, t_env *env)
 {
 	t_point		*tmp;
 
+	ft_putnbr(code);
 	tmp = env->p;
-	while (tmp != NULL)
-	{
-		ft_putnbr(tmp->y);
-		tmp = tmp->next;
-	}
-	if (code == 123)
+	if (code == 86)
 		m_rot_y(env, ROT_POW);
-	if (code == 124)
+	if (code == 69)
 		m_rot_y(env, -ROT_POW);
-	if (code == 126)
+	if (code == 91)
 		m_rot_x(env, ROT_POW);
-	if (code == 125)
+	if (code == 87)
 		m_rot_x(env, -ROT_POW);
+	if (code == 92)
+		m_rot_z(env, ROT_POW);
+	if (code == 88)
+		m_rot_z(env, -ROT_POW);
 //ajouter les rotations ici;
 	if (code == 0)
 		/*env->p = */m_rlud(env, SPEED, 0);
-	ft_putstr("1ere matrice passe");
 	if (code == 2)
 		/*env->p = */m_rlud(env, -SPEED, 0);
 	if (code == 49)

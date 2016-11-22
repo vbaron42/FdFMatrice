@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 03:12:00 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 18:20:11 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 19:47:43 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ void			map_center(t_env *env)
 		tmp = tmp->next;
 	center.x = (tmp->x + env->p->x) / 2;
 	center.y = (tmp->y + env->p->y) / 2;
-	ft_putchar('\n');
-	ft_putnbr(center.x);
-	ft_putchar('\n');
-	ft_putnbr(center.y);
 	env->center = center;
 }
 
@@ -47,7 +43,6 @@ t_point			*matricialisation(t_env *env, t_point *p, t_matrice *m)
 	p->x = x;
 	p->y = y;
 	p->z = z;
-	ft_putnbr(x);
 	p->x += env->center.x;
 	p->y += env->center.y;
 	return (p);
@@ -70,7 +65,6 @@ void			matrice(t_env *env, t_matrice *m)
 			tmp = tmp->next;
 		}
 	}
-//	return (env->p);
 }
 
 void			m_rot_y(t_env *env, double x)
@@ -100,6 +94,22 @@ void			m_rot_x(t_env *env, double x)
 	m->g = -sin(x);
 	m->j = sin(x);
 	m->k = cos(x);
+	m->p = 1;
+	matrice(env, m);
+	free(m);
+}
+
+void			m_rot_z(t_env *env, double x)
+{
+	t_matrice	*m;
+
+	if (!(m = (t_matrice*)ft_memalloc(sizeof(t_matrice))))
+		;//ft_error();
+	m->a = cos(x);
+	m->b = -sin(x);
+	m->e = sin(x);
+	m->f = cos(x);
+	m->k = 1;
 	m->p = 1;
 	matrice(env, m);
 	free(m);
