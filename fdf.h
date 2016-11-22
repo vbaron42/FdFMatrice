@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 22:43:45 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 21:17:22 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 22:50:59 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 # include "libft/libft.h"
 # include <mlx.h>
 # include <math.h>
+
 # define TITLE "You can change this useless title in fdf.h"
-# define WIN_LEN 1200
-# define WIN_HEIGHT 950
+# define WIN_LEN 1100
+# define WIN_HEIGHT 900
 # define ROT_POW 3.14159265358979323846 / 64
 # define SPEED 20
 # define SCALE_POWER 0.2
@@ -41,15 +42,7 @@ typedef struct		s_matrice
 	double			o;
 	double			p;
 }					t_matrice;
-/*
-typedef struct		s_tab//inutil ?
-{
-	int				x;
-	int				y;
-	int				z;
-	int				w;
-}					t_tab;
-*/
+
 typedef struct		s_point
 {
 	double			x;
@@ -82,14 +75,13 @@ typedef struct		s_img
 typedef struct		s_env
 {
 	int				dc;
-	int				xmax;//		a enlever du .h et a integrer
-	int				ymax;//		dans une fonction
-	int				zmax;//		pour trouver scale
+	int				xmax;
+	int				ymax;
+	int				zmax;
 	t_point			center;
 	void			*mlx;
 	void			*win;
 	t_img			*img;
-//	t_tab			**tab;
 	t_point			*p;
 	int				error;
 }					t_env;
@@ -101,12 +93,9 @@ void				m_rot_y(t_env *env, double x);
 void				m_rot_x(t_env *env, double x);
 void				m_rot_z(t_env *env, double x);
 void				map_center(t_env *env);
-//void				matricialisation(t_env *env, t_point *p, t_matrice *m);
 void				m_scale(t_env *env, double s);
 void				m_rlud(t_env *env, double x, double y);
 t_point				*matricialisation(t_env *env, t_point *p, t_matrice *m);
-//t_point				*m_scale(t_env *env, double s);
-//t_point				*m_rlud(t_env *env, double x, double y);
 void				matrice(t_env *env, t_matrice *m);
 int					event(int keycode, t_env *env);
 t_img				*new_img(t_env *env);

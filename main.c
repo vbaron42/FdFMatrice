@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:50:50 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 21:13:59 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 22:50:55 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_point			*ft_lstadd_p(t_point *p, int x, char *str, int z)
 	t_point		*newp;
 	t_point		*tmp;
 
-	newp = (t_point *)malloc(sizeof(t_point));
+	if ((newp = (t_point *)malloc(sizeof(t_point))) == NULL)
+		;//ft_error
 	newp->x = x;
 	newp->y = ft_atoi(str);
 	newp->z = z;
@@ -53,10 +54,11 @@ t_point			*fill_p(int fd)
 		if (x == -1)
 			return (NULL);
 		x = 0;
-		str = ft_strsplit_mo(line, ' ', '	', ' ');//ft_free str et line ?
+		str = ft_strsplit_mo(line, ' ', '	', ' ');
 		while (str[x] != NULL)//Attention crash en cas d'insertion de caractere
 		{//chercher d ou vient le probleme (surement ici)
 			p = ft_lstadd_p(p, x, str[x], z);
+			free(str[x]);
 			x++;
 		}
 		z++;
@@ -94,10 +96,12 @@ void			center_points(t_env *env)
 	m_scale(env, s);
 }
 
-void			get_max(t_env *env, t_point *p)
+int				get_max(t_env *env, t_point *p)
 {
 	t_point		*tmp;
+	int			i;
 
+	i = 0;
 	tmp = p;
 	while (tmp != NULL)
 	{
@@ -107,8 +111,12 @@ void			get_max(t_env *env, t_point *p)
 			env->ymax = tmp->y;
 		if (env->zmax < tmp->z)
 			env->zmax = tmp->z;
-		tmp = tmp->next;//if xmax * zmax != nb de point return error
+		tmp = tmp->next;
+		i++;
 	}
+	if ((env->xmax + 1) * (env->zmax + 1) != i)
+		return (0);
+	return (1);
 }
 
 int				main(int argc, char **argv)
@@ -117,10 +125,11 @@ int				main(int argc, char **argv)
 	t_env		*env;
 	void		*mlx;
 	void		*win;
-//	t_tab		**tab;
 
+	if (WIN_LEN > 2500 || WIN_HEIGHT > 1500 || WIN_LEN < 10 || WIN_HEIGHT < 10)
+		return (-1);
 	if (argc != 2 || (p = get_map(argv[1])) == NULL)
-		return (-1);//gerer les tailles de fenetres trop faible ou importantes
+		return (-1);
 	if (!(env = (t_env*)malloc(sizeof(t_env))))
 		return (-1);
 	if (!(env->mlx = mlx_init()))
@@ -129,19 +138,14 @@ int				main(int argc, char **argv)
 		return (-1);
 	if (!(env->img = new_img(env)))
 		return (-1);
-/*	env->scale = 1;
-	while (WIN_HEIGHT / 2 > map->h * env->scale
-				&& WIN_LEN / 2 > map->l * env->scale
-				&& env->scale < SCALE_MAX)
-		env->scale += 1;*/
 	env->p = p;
 	color_map(env);
 	map_center(env);
-	get_max(env, env->p);
+	if (get_max(env, env->p) == 0)
+		return (0);
 	center_points(env);
 	if (draw_map(p, env) == -1)
 		return (-1);//fermer la fenetre et exit
-//	env->tab = keep_value(p, env);
 	mlx_key_hook(env->win, event, env);
 	mlx_expose_hook(env->win, print_img, env);
 	mlx_loop(env->mlx);
