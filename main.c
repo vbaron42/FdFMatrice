@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:50:50 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 20:51:26 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 21:13:59 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_point			*fill_p(int fd)
 			return (NULL);
 		x = 0;
 		str = ft_strsplit_mo(line, ' ', '	', ' ');//ft_free str et line ?
-		while (str[x] != NULL)
-		{
+		while (str[x] != NULL)//Attention crash en cas d'insertion de caractere
+		{//chercher d ou vient le probleme (surement ici)
 			p = ft_lstadd_p(p, x, str[x], z);
 			x++;
 		}
@@ -77,34 +77,6 @@ t_point			*get_map(char *file)
 	return (p);
 }
 
-/*
-t_tab			**keep_value(t_point *p, t_env *env)//utile ? :/
-{
-	t_tab		**tab;
-	int			i;
-	int			i2;
-
-	i = -1;
-	if (!(tab = (t_tab**)malloc((zmax + 1) * sizeof(tab*))))
-			return (NULL);
-	while (i++ <= env->zmax)
-	{
-		if (!(tab[i] = (t_tab*)malloc((env->xmax + 1) * sizeof(tab))))
-			return (NULL);
-		i2 = -1;
-		while (i2++ <= env->xmax)
-		{
-			tab[i][i2]->x = p->x;
-			tab[i][i2]->y = p->y;
-			tab[i][i2]->z = p->z;
-			tab[i][i2]->w = 1;//utile ? (surement)
-			p = p->next;
-		}
-	}
-	return (tab);
-}
-*/
-
 void			center_points(t_env *env)
 {
 	int			height;
@@ -114,7 +86,7 @@ void			center_points(t_env *env)
 	height = WIN_HEIGHT / 3;
 	len = (WIN_LEN + 100) / 2;
 	env->center.x == 0 ? env->center.x = 10 : env->center.x;
-	s = (len - 200) / (env->center.x);
+	s = (len - 300) / (env->center.x);
 	ft_putstr("\n\n\n");
 	ft_putnbr(-env->center.y + height);
 	m_rlud(env, -env->center.x + len, -env->center.y + height);
@@ -135,7 +107,7 @@ void			get_max(t_env *env, t_point *p)
 			env->ymax = tmp->y;
 		if (env->zmax < tmp->z)
 			env->zmax = tmp->z;
-		tmp = tmp->next;
+		tmp = tmp->next;//if xmax * zmax != nb de point return error
 	}
 }
 
@@ -148,12 +120,12 @@ int				main(int argc, char **argv)
 //	t_tab		**tab;
 
 	if (argc != 2 || (p = get_map(argv[1])) == NULL)
-		return (-1);
+		return (-1);//gerer les tailles de fenetres trop faible ou importantes
 	if (!(env = (t_env*)malloc(sizeof(t_env))))
 		return (-1);
 	if (!(env->mlx = mlx_init()))
 		return (-1);
-	if (!(env->win = mlx_new_window(env->mlx, WIN_LEN, WIN_HEIGHT, "title")))
+	if (!(env->win = mlx_new_window(env->mlx, WIN_LEN, WIN_HEIGHT, TITLE)))
 		return (-1);
 	if (!(env->img = new_img(env)))
 		return (-1);

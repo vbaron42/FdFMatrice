@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 22:43:45 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 20:28:02 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 21:17:22 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 # include "libft/libft.h"
 # include <mlx.h>
 # include <math.h>
-# define TILE_WIDTH 60
-# define TILE_HEIGHT 40
-# define P_HEIGHT 1
-# define WIN_LEN 900
+# define TITLE "You can change this useless title in fdf.h"
+# define WIN_LEN 1200
 # define WIN_HEIGHT 950
 # define ROT_POW 3.14159265358979323846 / 64
 # define SPEED 20
