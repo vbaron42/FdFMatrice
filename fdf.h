@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 22:43:45 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/21 22:34:53 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 17:25:43 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,27 @@
 # define P_HEIGHT 1
 # define WIN_LEN 900
 # define WIN_HEIGHT 950
-# define SPEED 10
-# define SCALE_POWER 0.1
+# define SPEED 20
+# define SCALE_POWER 0.2
 
 typedef struct		s_matrice
 {
-	int				a;
-	int				b;
-	int				c;
-	int				d;
-	int				e;
-	int				f;
-	int				g;
-	int				h;
-	int				i;
-	int				j;
-	int				k;
-	int				l;
-	int				m;
-	int				n;
-	int				o;
-	int				p;
+	double			a;
+	double			b;
+	double			c;
+	double			d;
+	double			e;
+	double			f;
+	double			g;
+	double			h;
+	double			i;
+	double			j;
+	double			k;
+	double			l;
+	double			m;
+	double			n;
+	double			o;
+	double			p;
 }					t_matrice;
 /*
 typedef struct		s_tab//inutil ?
@@ -52,9 +52,9 @@ typedef struct		s_tab//inutil ?
 */
 typedef struct		s_point
 {
-	int				x;
-	int				y;
-	int				z;
+	double			x;
+	double			y;
+	double			z;
 	int				c;
 	void			*next;
 }					t_point;

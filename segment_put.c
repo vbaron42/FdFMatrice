@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:10:30 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/21 20:25:37 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 17:25:40 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,19 @@ t_line_data			*new_ldata(t_point a, t_point b)
 	return (l);
 }
 
+t_point				double_to_int(t_point a)
+{
+	a.x = (int)a.x;
+	a.y = (int)a.y;
+	return (a);
+}
+
 int					segment_put(t_env *env, t_point a, t_point b)
 {
 	t_line_data		*l;
 
+	a = double_to_int(a);
+	b = double_to_int(b);
 	if (!(l = new_ldata(a, b)))
 		return (-1);
 	while (42)
