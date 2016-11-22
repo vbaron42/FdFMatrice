@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 22:43:45 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 19:54:02 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 20:28:02 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct		s_point
 	double			y;
 	double			z;
 	int				c;
+	int				dc;
 	void			*next;
 }					t_point;
 
@@ -82,9 +83,7 @@ typedef struct		s_img
 
 typedef struct		s_env
 {
-	int				rl;
-	int				ud;
-	int				scale;
+	int				dc;
 	int				xmax;//		a enlever du .h et a integrer
 	int				ymax;//		dans une fonction
 	int				zmax;//		pour trouver scale
@@ -97,6 +96,9 @@ typedef struct		s_env
 	int				error;
 }					t_env;
 
+void				img_put_pixel(t_env *env, t_point *p, int c);
+void				color_map(t_env *env);
+void				choose_color(t_env *env, t_point a, t_point b);
 void				m_rot_y(t_env *env, double x);
 void				m_rot_x(t_env *env, double x);
 void				m_rot_z(t_env *env, double x);

@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:10:30 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 17:25:40 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 20:25:46 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,7 @@ int					segment_put(t_env *env, t_point a, t_point b)
 		return (-1);
 	while (42)
 	{
-		if (b.z > a.z)
-			img_put_pixel(env, &a, b.c);
-		else
-			img_put_pixel(env, &a, a.c);
+		choose_color(env, a, b);
 		if (a.x == b.x && a.y == b.y)
 			break ;
 		l->e = l->err;

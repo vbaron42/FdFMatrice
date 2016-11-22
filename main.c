@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:50:50 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 19:35:31 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 20:23:53 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,6 @@ int				main(int argc, char **argv)
 		return (-1);
 	if (!(env = (t_env*)malloc(sizeof(t_env))))
 		return (-1);
-	env->rl = 0;
-	env->ud = 0;
 	if (!(env->mlx = mlx_init()))
 		return (-1);
 	if (!(env->win = mlx_new_window(env->mlx, WIN_LEN, WIN_HEIGHT, "title")))
@@ -164,6 +162,7 @@ int				main(int argc, char **argv)
 				&& env->scale < SCALE_MAX)
 		env->scale += 1;*/
 	env->p = p;
+	color_map(env);
 	map_center(env);
 	get_max(env, env->p);
 	center_points(env);

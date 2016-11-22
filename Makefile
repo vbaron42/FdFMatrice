@@ -6,14 +6,14 @@
 #    By: vbaron <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/26 00:59:46 by vbaron            #+#    #+#              #
-#    Updated: 2016/11/20 15:41:59 by vbaron           ###   ########.fr        #
+#    Updated: 2016/11/22 20:25:20 by vbaron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	fdf
 FLAGS	=	-lmlx -framework OpenGL -framework AppKit
 CC		=	gcc
-SRC		=	main.c segment_put.c img.c event.c matrice.c
+SRC		=	main.c segment_put.c img.c event.c matrice.c color.c
 OBJ		=	$(SRC:.c=.o)
 
 all:		$(NAME)
