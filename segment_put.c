@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:10:30 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/23 00:05:47 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/23 00:10:50 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_line_data			*new_ldata(t_point a, t_point b)
 	t_line_data		*l;
 
 	if (!(l = (t_line_data*)malloc(sizeof(t_line_data))))
-		return (NULL);
+		ft_error("Malloc error\n");
 	l->dx = ft_abs(b.x - a.x);
 	l->dy = ft_abs(b.y - a.y);
 	l->ix = (a.x < b.x) ? 1 : -1;
@@ -53,8 +53,7 @@ void				segment_put(t_env *env, t_point a, t_point b)
 
 	a = double_to_int(a);
 	b = double_to_int(b);
-	if (!(l = new_ldata(a, b)))
-		return (-1);
+	l = new_ldata(a, b);
 	while (42)
 	{
 		choose_color(env, a, b);
