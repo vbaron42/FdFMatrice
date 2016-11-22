@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:50:50 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 20:23:53 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 20:51:26 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,14 @@ void			center_points(t_env *env)
 	int			len;
 	double		s;
 
-	height = (WIN_HEIGHT + 100) / 2;
+	height = WIN_HEIGHT / 3;
 	len = (WIN_LEN + 100) / 2;
 	env->center.x == 0 ? env->center.x = 10 : env->center.x;
-	s = (len - 100) / (env->center.x);
+	s = (len - 200) / (env->center.x);
 	ft_putstr("\n\n\n");
 	ft_putnbr(-env->center.y + height);
 	m_rlud(env, -env->center.x + len, -env->center.y + height);
+	m_rot_x(env, -ROT_POW * 50);
 	m_scale(env, s);
 }
 
