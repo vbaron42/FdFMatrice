@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:10:30 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 20:25:46 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/23 00:05:47 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_point				double_to_int(t_point a)
 	return (a);
 }
 
-int					segment_put(t_env *env, t_point a, t_point b)
+void				segment_put(t_env *env, t_point a, t_point b)
 {
 	t_line_data		*l;
 
@@ -72,14 +72,13 @@ int					segment_put(t_env *env, t_point a, t_point b)
 			a.y += l->iy;
 		}
 	}
-	return (0);
 }
 
 /*
 **	free ldata
 */
 
-int					draw_map(t_point *p, t_env *env)
+void				draw_map(t_point *p, t_env *env)
 {
 	t_point			*pnext;
 	t_point			*pdown;
@@ -93,9 +92,9 @@ int					draw_map(t_point *p, t_env *env)
 	while (pnext != NULL)
 	{
 		if (pdown != NULL)
-			env->error = segment_put(env, *p, *pdown);
+			segment_put(env, *p, *pdown);
 		if (i++ < env->xmax)
-			env->error = segment_put(env, *p, *pnext);
+			segment_put(env, *p, *pnext);
 		else
 			i = 0;
 		p = p->next;
@@ -103,5 +102,4 @@ int					draw_map(t_point *p, t_env *env)
 		if (pdown != NULL)
 			pdown = pdown->next;
 	}
-	return (env->error);
 }

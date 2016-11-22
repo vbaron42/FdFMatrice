@@ -6,18 +6,14 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 02:32:14 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 20:51:31 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/22 23:59:36 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int				key_hook(int code, t_env *env)
+void			key_hook(int code, t_env *env)
 {
-	t_point		*tmp;
-
-	ft_putnbr(code);
-	tmp = env->p;
 	if (code == 86)
 		m_rot_y(env, ROT_POW);
 	if (code == 69)
@@ -45,7 +41,6 @@ int				key_hook(int code, t_env *env)
 		/*env->p = */m_scale(env, 1 - SCALE_POWER);
 	if (code == 8)
 		env->dc = -env->dc;
-	return (0);
 }//colorier soit meme la map :) avec le curseur et les touches
 
 int				event(int code, t_env *env)

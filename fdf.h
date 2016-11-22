@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 22:43:45 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 22:50:59 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/23 00:04:10 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ typedef struct		s_env
 	void			*win;
 	t_img			*img;
 	t_point			*p;
-	int				error;
 }					t_env;
 
+void				ft_error(char *str);
 void				img_put_pixel(t_env *env, t_point *p, int c);
 void				color_map(t_env *env);
 void				choose_color(t_env *env, t_point a, t_point b);
@@ -102,5 +102,5 @@ t_img				*new_img(t_env *env);
 int					print_img(t_env *env);
 t_point				*get_map(char *file);
 t_point				ortho_to_iso(t_point p, t_env env);
-int					draw_map(t_point *p, t_env *env);
+void				draw_map(t_point *p, t_env *env);
 #endif
