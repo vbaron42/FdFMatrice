@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 02:32:14 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/22 23:59:36 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/23 06:04:49 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,19 @@ void			key_hook(int code, t_env *env)
 		m_rot_z(env, ROT_POW);
 	if (code == 88)
 		m_rot_z(env, -ROT_POW);
-//ajouter les rotations ici;
-	if (code == 0)
-		/*env->p = */m_rlud(env, SPEED, 0);
 	if (code == 2)
-		/*env->p = */m_rlud(env, -SPEED, 0);
-	if (code == 49)
-		/*env->p = */m_rlud(env, 0, SPEED);
-	if (code == 257)
-		/*env->p = */m_rlud(env, 0, -SPEED);
-	if (code == 13)
-		/*env->p = */m_scale(env, 1 + SCALE_POWER);
+		m_rlud(env, SPEED, 0);
+	if (code == 0)
+		m_rlud(env, -SPEED, 0);
 	if (code == 1)
-		/*env->p = */m_scale(env, 1 - SCALE_POWER);
-	if (code == 8)
-		env->dc = -env->dc;
-}//colorier soit meme la map :) avec le curseur et les touches
+		m_rlud(env, 0, SPEED);
+	if (code == 13)
+		m_rlud(env, 0, -SPEED);
+	if (code == 49)
+		m_scale(env, 1 + SCALE_POWER);
+	if (code == 257)
+		m_scale(env, 1 - SCALE_POWER);
+}
 
 int				event(int code, t_env *env)
 {
@@ -51,6 +48,8 @@ int				event(int code, t_env *env)
 		exit(0);
 	}
 	key_hook(code, env);
+	if (code == 8)
+		env->dc = -env->dc;
 	print_img(env);
 	return (0);
 }

@@ -6,84 +6,16 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 16:50:50 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/23 00:14:38 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/23 06:16:48 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <fcntl.h> //utile ? a mettre dans le .h ?
 
-void		ft_error(char *str)
+void			ft_error(char *str)
 {
 	ft_putstr_fd(str, 2);
 	exit(1);
-}
-
-t_point			*ft_lstadd_p(t_point *p, int x, char *str, int z)
-{
-	t_point		*newp;
-	t_point		*tmp;
-
-	if ((newp = (t_point *)malloc(sizeof(t_point))) == NULL)
-		ft_error("Malloc error\n");
-	newp->x = x;
-	newp->y = ft_atoi(str);
-	newp->z = z;
-	newp->c = ft_atoi_16(str);
-	if ((newp->c = ft_atoi_16(str)) == 0)
-		newp->c = 0xFFFFFF;
-	if (newp)
-		newp->next = NULL;
-	if (p == NULL)
-		return (newp);
-	tmp = p;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = newp;
-	return (p);
-}
-
-t_point			*fill_p(int fd)
-{
-	t_point		*p;
-	char		**str;
-	char		*line;
-	int			x;
-	int			z;
-
-	p = NULL;
-	if (!(line = ft_strnew(1)))
-		ft_error("Malloc error\n");
-	z = 0;
-	while ((x = get_next_line(fd, &line)) != 0)
-	{
-		if (x == -1)
-			ft_error("Get_next_line return -1\n");
-		x = 0;
-		str = ft_strsplit_mo(line, ' ', '	', ' ');
-		while (str[x] != NULL)//Attention crash en cas d'insertion de caractere
-		{//chercher d ou vient le probleme (surement ici)
-			p = ft_lstadd_p(p, x, str[x], z);
-			free(str[x]);
-			x++;
-		}
-		z++;
-	}
-	return (p);
-}
-
-t_point			*get_map(char *file)
-{
-	int			fd;
-	t_point		*p;
-
-	if (!(ft_strstr(file, ".fdf")))
-		ft_error("Usage : ./fdf file.fdf <-\n");
-	if ((fd = open(file, O_RDONLY)) == -1)
-		ft_error("The file can't be open\n");
-	p = fill_p(fd);
-	close(fd);
-	return (p);
 }
 
 void			center_points(t_env *env)
@@ -123,6 +55,15 @@ void			get_max(t_env *env, t_point *p)
 		ft_error("Invalid file, your map must be a rectangle\n");
 }
 
+void			init_map(t_env *env)
+{
+	color_map(env);
+	map_center(env);
+	get_max(env, env->p);
+	center_points(env);
+	draw_map(env->p, env);
+}
+
 int				main(int argc, char **argv)
 {
 	t_point		*p;
@@ -130,7 +71,8 @@ int				main(int argc, char **argv)
 	void		*mlx;
 	void		*win;
 
-	if (WIN_LEN > 2500 || WIN_HEIGHT > 1500 || WIN_LEN < 10 || WIN_HEIGHT < 10)
+	if (WIN_LEN > 2500 || WIN_HEIGHT > 1500
+			|| WIN_LEN < 200 || WIN_HEIGHT < 200)
 		ft_error("Choose a correct window size\n");
 	if (argc != 2)
 		ft_error("Usage : ./fdf file.fdf\n");
@@ -144,11 +86,7 @@ int				main(int argc, char **argv)
 		ft_error("mlx_new_window() error\n");
 	env->img = new_img(env);
 	env->p = p;
-	color_map(env);
-	map_center(env);
-	get_max(env, env->p);
-	center_points(env);
-	draw_map(p, env);
+	init_map(env);
 	mlx_key_hook(env->win, event, env);
 	mlx_expose_hook(env->win, print_img, env);
 	mlx_loop(env->mlx);

@@ -6,13 +6,14 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 22:43:45 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/23 00:04:10 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/11/23 05:29:56 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # include "libft/libft.h"
+# include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
 
@@ -37,10 +38,6 @@ typedef struct		s_matrice
 	double			j;
 	double			k;
 	double			l;
-	double			m;
-	double			n;
-	double			o;
-	double			p;
 }					t_matrice;
 
 typedef struct		s_point
