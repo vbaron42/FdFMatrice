@@ -6,7 +6,7 @@
 /*   By: vbaron <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 19:10:30 by vbaron            #+#    #+#             */
-/*   Updated: 2016/11/23 00:10:50 by vbaron           ###   ########.fr       */
+/*   Updated: 2016/12/14 17:12:27 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_line_data			*new_ldata(t_point a, t_point b)
 
 t_point				double_to_int(t_point a)
 {
+	a.x += 0.5;
+	a.y += 0.5;
 	a.x = (int)a.x;
 	a.y = (int)a.y;
 	return (a);
@@ -71,11 +73,8 @@ void				segment_put(t_env *env, t_point a, t_point b)
 			a.y += l->iy;
 		}
 	}
+	free(l);
 }
-
-/*
-**	free ldata
-*/
 
 void				draw_map(t_point *p, t_env *env)
 {
